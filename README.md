@@ -33,8 +33,9 @@ move_review_analysis/
 │   └── reviews_with_severity.csv
 │
 ├── SCRIPTS/
-│   ├── movie-reviews-script.py
-│   └── movie-review-testing.R
+│   ├── eda_and_cleaning.py
+│   ├── movie-review-testing.R
+│   └── roberta_sentiment.py
 │
 ├── OUTPUT/
 │   ├── anova_extremity_length_group.csv
@@ -51,6 +52,11 @@ move_review_analysis/
 ## Section 3: Instructions for Reproducing Results
 
 ### Step 1: Clone the Repository
+
+```bash
+git clone https://github.com/purplemorgy/movie-review-analysis
+cd move_review_analysis
+```
 
 ---
 
@@ -76,29 +82,49 @@ venv\Scripts\activate
 
 ---
 
-### Step 3: Install Required Packages
+### Step 3: Install Packages
 
-Run this in your terminal:
+**Base Packages (Required)**
+
+These packages are required to run data preprocessing and exploratory data analysis:
 
 ```bash
-pip install pandas matplotlib numpy torch torchvision torchaudio transformers statsmodels
+pip install pandas matplotlib numpy statsmodels
+```
+
+**RoBERTa Sentiment Model (Optional)**
+
+If you want to compute sentiment severity using the RoBERTa model instead of reading in the data from a csv, run:
+
+```bash
+pip install torch torchvision torchaudio transformers tqdm
 ```
 
 ---
 
-### Step 4: Run the Analysis Script
+### Step 4: Run Data Cleaning and Exploratory Data Analysis Script
 
-Run the preprocessing and sentiment analysis script:
+Run this script to clean the IMDB dataset, generates EDA plots, and saves a cleaned dataset as cleaned_reviews.csv:
 
 ```bash
-python SCRIPTS/movie_reviews_script.py
+python SCRIPTS/eda_and_cleaning.py
 ```
 
 ---
 
-### Step 5: Run the Hypothesis Testing Script
+### Step 5: Run Data Cleaning and Exploratory Data Analysis Script (Optional)
 
-After the first script completes, run:
+This step is optional. The core analysis can still be performed without running the RoBERTa model. Run this script to compute sentiment severity scores using RoBERTa:
+
+```bash
+python SCRIPTS/roberta_sentiment.py
+```
+
+---
+
+### Step 6: Run the Hypothesis Testing Script
+
+Run this script to perform analysis:
 
 ```bash
 python SCRIPTS/movie_review_testing.R
