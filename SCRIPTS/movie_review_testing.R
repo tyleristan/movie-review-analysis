@@ -7,7 +7,7 @@ library(scales)
 output_dir <- "../OUTPUT"
 
 # Load dataset
-review_data <- read.csv("../DATA/reviews_with_severity.csv")
+review_data <- read.csv("DATA/reviews_with_severity.csv")
 
 review_data_clean <- review_data %>%
   select(review, length_group, roberta_severity) %>%
@@ -52,7 +52,7 @@ if(t_test_result$p < 0.05){
   print("No statistically significant difference in review length between negative and positive reviews.")
 }
 
-write.csv(t_test_result, file.path(output_dir, "t_test_review_length_sentiment.csv"), row.names = FALSE)
+write.csv(t_test_result, file.path("OUTPUT", "t_test_review_length_sentiment.csv"), row.names = FALSE)
 
 
 # -----------------------------------------------------------------------------------
@@ -63,7 +63,7 @@ anova_result <- review_data_clean %>%
 print("----- Test 2: Extremity by length group (Welch ANOVA) -----")
 print(anova_result)
 
-write.csv(anova_result, file.path(output_dir, "anova_extremity_length_group.csv"), row.names = FALSE)
+write.csv(anova_result, file.path("OUTPUT", "anova_extremity_length_group.csv"), row.names = FALSE)
 
 
 
@@ -91,8 +91,7 @@ pairwise_with_means <- review_data_clean %>%
 print("----- Pairwise Comparisons of Extremity by Length Group -----")
 print(pairwise_with_means)
 
-write.csv(pairwise_with_means, file.path(output_dir, "pairwise_extremity_length_group.csv"), row.names = FALSE)
-
+write.csv(pairwise_with_means, file.path("OUTPUT", "pairwise_extremity_length_group.csv"), row.names = FALSE)
 
 #---------------------------
 # Extremity plot
@@ -123,7 +122,7 @@ mean_extremity_plot <- ggplot(extremity_summary, aes(x = length_group, y = mean_
   )
 
 ggsave(
-  filename = "../OUTPUT/mean_extremity_by_length_group.pdf",
+  filename = file.path("OUTPUT", "mean_extremity_by_length_group.pdf"),
   plot = mean_extremity_plot,
   width = 8,
   height = 6,
