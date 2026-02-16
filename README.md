@@ -127,7 +127,7 @@ python SCRIPTS/roberta_sentiment.py
 Run this script to perform analysis:
 
 ```bash
-python SCRIPTS/movie_review_testing.R
+Rscript SCRIPTS/movie_review_testing.R
 ```
 
 
